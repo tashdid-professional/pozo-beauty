@@ -77,8 +77,27 @@ The service layer currently expects the following (can be customized in `api.ts`
 - `GET /social-links`: returns `SocialLinks`
 - `GET /shop-header`: returns `{ image: string }`
 - `POST /contact`: Receives `{ name, email, phone, website, message }`
+- `POST /newsletter`: Receives `{ email }`
+- `POST /blogs/:slug/comments`: Receives `{ name, email, comment }`
 
-## 5. Global Requirements
+## 5. Form Integration Details
+
+### Contact Form
+The contact page [app/contact/page.tsx](app/contact/page.tsx) handles submission.
+- **Fields**: `name`, `email`, `phone`, `website`, `message`.
+- **Validation**: Ensure all fields are sanitized. Return `200 OK` on success.
+
+### Newsletter Form
+The footer [components/Footer.tsx](components/Footer.tsx) (and sometimes banners) contains a newsletter signup.
+- **Fields**: `email`.
+- **Logic**: Store in a `Subscribers` table or sync with a service like Mailchimp/SendGrid.
+
+### Blog Comments
+The individual blog post page [app/blog/[slug]/page.tsx](app/blog/[slug]/page.tsx) includes a comment form.
+- **Fields**: `name`, `email`, `comment`.
+- **Logic**: Associate comments with the blog `slug` or `id`. It is recommended to add an `isApproved` boolean field for moderation.
+
+## 6. Global Requirements
 - **CORS**: Enable CORS for the frontend domain to allow requests.
 - **Image Hosting**: Use absolute URLs for all image fields or ensure consistent relative paths.
 - **Slugs**: Slugs must be unique and URL-encoded.
