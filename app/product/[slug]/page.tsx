@@ -77,7 +77,7 @@ export default function ProductDetailsPage() {
   }
 
   const relatedProducts = allProducts
-    .filter((p) => p.category === product.category && p.id !== product.id)
+    .filter((p) => p.category !== product.category && p.id !== product.id)
     .slice(0, 4);
 
   const activeGallery = selectedVariant ? selectedVariant.gallery : product.gallery;
