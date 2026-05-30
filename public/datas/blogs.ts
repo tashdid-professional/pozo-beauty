@@ -27,7 +27,7 @@ export const blogs: Blog[] = [
     description1: "Lorem ipsum dolor sit amet, odio legere cotidieque ex quo, an noster evertitur vel, ei solet democritum est. Id mel tibique ancillae convenire. Admodum tacimates maiestatis his id. Sed everti accusamus facilisi ne. Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.",
     descriptionmiddle: "Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum.",
     description2: "Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at.Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis.Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui.Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/Images/products/1.jpg",
+    image: "https://picsum.photos/seed/b1/1200/800",
     isFeatured: true,
   },
   {
@@ -42,7 +42,7 @@ export const blogs: Blog[] = [
     description1: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.",
     descriptionmiddle: "Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum.",
     description2: "Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at.Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis.Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui.Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/Images/products/2.jpg",
+    image: "https://picsum.photos/seed/b2/1200/800",
     isFeatured: true,
   },
   {
@@ -57,7 +57,7 @@ export const blogs: Blog[] = [
     description1: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.",
     descriptionmiddle: "Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum.",
     description2: "Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at.Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis.Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui.Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/Images/products/3.jpg",
+    image: "https://picsum.photos/seed/b3/1200/800",
   },
   {
     id: 4,
@@ -71,7 +71,7 @@ export const blogs: Blog[] = [
     description1: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.",
     descriptionmiddle: "Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum.",
     description2: "Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at.Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis.Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui.Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/Images/products/10.jpg",
+    image: "https://picsum.photos/seed/b4/1200/800",
   },
   {
     id: 5,
@@ -85,7 +85,7 @@ export const blogs: Blog[] = [
     description1: "As the temperature rises, your skin's needs change. This guide covers everything from lightweight hydration to the importance of SPF reapplication. We dive deep into the best ingredients for summer, such as Vitamin C for antioxidant protection and Hyaluronic Acid for oil-free moisture.",
     descriptionmiddle: "Learn how to transition your heavy winter creams to breezy summer serums without losing that healthy glow.",
     description2: "Our routine is designed for all skin types, focusing on maintaining a balanced barrier while dealing with increased sweat and sebum production.",
-    image: "https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg",
+    image: "https://picsum.photos/seed/b5/1200/800",
     isFeatured: true,
   },
   {
@@ -100,6 +100,6 @@ export const blogs: Blog[] = [
     description1: "Whether you prefer a subtle tightline or a bold dramatic wing, mastering eyeliner is a fundamental skill for any makeup enthusiast.",
     descriptionmiddle: "In this post, Marco V shares professional secrets for steadying your hand, choosing the right formula for your eye shape, and the absolute best tools for the job.",
     description2: "We explore the history of the cat-eye and provide a step-by-step tutorial for three versatile looks that transition perfectly from day to night. Stop struggling with uneven lines and start creating art on your eyelids.",
-    image: "https://images.pexels.com/photos/3321416/pexels-photo-3321416.jpeg",
+    image: "https://picsum.photos/seed/b6/1200/800",
   },
 ];
