@@ -1,7 +1,8 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
-import { bannerSlides } from "@/public/datas/homepage";
+import { getBannerSlides } from "@/src/services/api";
+import { BannerSlide } from "@/src/types";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -10,13 +11,20 @@ import Link from "next/link";
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [bannerSlides, setBannerSlides] = useState<BannerSlide[]>([]);
 
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % bannerSlides.length);
+  useEffect(() => {
+    getBannerSlides().then(setBannerSlides);
   }, []);
 
+  const nextSlide = useCallback(() => {
+    if (bannerSlides.length === 0) return;
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % bannerSlides.length);
+  }, [bannerSlides]);
+
   const prevSlide = () => {
+    if (bannerSlides.length === 0) return;
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
   };
@@ -59,8 +67,10 @@ export default function Banner() {
 
   const slide = bannerSlides[currentIndex];
 
+  if (!slide) return null;
+
   return (
-    <section className="relative w-full h-[440px] md:h-[600px] overflow-hidden flex items-center justify-center bg-black">
+    <section className="relative w-full h-110 md:h-150 overflow-hidden flex items-center justify-center bg-black">
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
@@ -86,13 +96,26 @@ export default function Banner() {
         >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              className="object-cover pointer-events-none"
-              priority
-            />
+            {/* Desktop Image */}
+            <div className="hidden md:block absolute inset-0">
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                className="object-cover pointer-events-none"
+                priority
+              />
+            </div>
+            {/* Mobile Image */}
+            <div className="md:hidden absolute inset-0">
+              <Image
+                src={slide.mobileImage}
+                alt={slide.title}
+                fill
+                className="object-cover pointer-events-none"
+                priority
+              />
+            </div>
             {/* Overlay to ensure text readability */}
             <div className="absolute inset-0 bg-black/5" />
           </div>
@@ -113,7 +136,7 @@ export default function Banner() {
               <h2 className="text-4xl md:text-[70px] font-lato font-light uppercase tracking-[0.08em] leading-[1.1] md:leading-[0.9] text-white md:text-black mb-6 md:mb-8 md:whitespace-nowrap">
                 {slide.title}
               </h2>
-              <p className="font-cormorant italic text-base md:text-[22px] text-white md:text-gray-800  max-w-lg mb-8 md:mb-10 mx-auto md:mx-0 leading-[27px]">
+              <p className="font-cormorant italic text-base md:text-[22px] text-white md:text-gray-800  max-w-lg mb-8 md:mb-10 mx-auto md:mx-0 leading-6.75">
                 {slide.description}
               </p>
               <a 

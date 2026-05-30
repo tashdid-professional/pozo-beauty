@@ -1,13 +1,20 @@
 "use client";
 
-import { products } from "@/public/datas/products";
+import { getFeaturedProducts } from "@/src/services/api";
+import { Product } from "@/src/types";
 import ProductCard from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function FeaturedProducts() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   
+  // Fetch featured products
+  useEffect(() => {
+    getFeaturedProducts().then(setFeaturedProducts);
+  }, []);
+
   // Responsive items per page
   const [itemsPerPage, setItemsPerPage] = useState(4);
 
@@ -41,18 +48,22 @@ export default function FeaturedProducts() {
   
   // Clone products for loop
   const extendedProducts = [
-    ...products.slice(-itemsPerPage),
-    ...products,
-    ...products.slice(0, itemsPerPage),
+    ...featuredProducts.slice(-itemsPerPage),
+    ...featuredProducts,
+    ...featuredProducts.slice(0, itemsPerPage),
   ];
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
+    if (featuredProducts.length === 0) return;
+    setCurrentIndex((prev) => (prev + 1) % featuredProducts.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+    if (featuredProducts.length === 0) return;
+    setCurrentIndex((prev) => (prev - 1 + featuredProducts.length) % featuredProducts.length);
   };
+
+  if (featuredProducts.length === 0) return null;
 
   return (
     <section id="featured-products" className="w-full py-16 md:py-24 bg-white px-4 md:px-20 relative">

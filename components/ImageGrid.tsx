@@ -3,13 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { InstagramPost } from "@/public/datas/homepage";
+import { ImageGridPost } from "@/src/types";
 
-interface InstagramShowcaseProps {
-  posts: InstagramPost[];
+interface ImageGridProps {
+  posts: ImageGridPost[];
 }
 
-const InstagramShowcase: React.FC<InstagramShowcaseProps> = ({ posts }) => {
+const ImageGrid: React.FC<ImageGridProps> = ({ posts }) => {
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-4 overflow-hidden">
@@ -49,4 +49,4 @@ const InstagramShowcase: React.FC<InstagramShowcaseProps> = ({ posts }) => {
   );
 };
 
-export default InstagramShowcase;
+export default ImageGrid;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Quality } from "@/public/datas/homepage";
+import { Quality } from "@/src/types";
 
 interface QualitiesProps {
   data: Quality[];

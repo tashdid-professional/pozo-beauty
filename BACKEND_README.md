@@ -1,16 +1,25 @@
 # Backend Integration Guide 
 
-This document provides instructions for backend developers to migrate the current static data system to a dynamic database-driven architecture using any backend technology (PHP, Node.js, Python, etc.).
+This document provides instructions for backend developers to migrate the current mock service layer to a dynamic database-driven architecture.
 
-## 1. Overview
-The frontend is built with Next.js and currently consumes data from static TypeScript files located in `public/datas/`. Your goal is to:
-1. Create a database reflecting these structures.
-2. Develop a REST API to serve this data as JSON.
-3. Build an Admin Panel for CRUD operations.
+## 1. Architecture Overview
+The frontend is built with Next.js (App Router) and uses a centralized service layer to manage data fetching.
 
-## 2. Database Schema Requirements
+- **Service Layer**: [src/services/api.ts](src/services/api.ts) contains all async functions used by the components.
+- **Type Definitions**: [src/types/index.ts](src/types/index.ts) serves as the single source of truth for all data models.
+- **Environment Variable**: Use `NEXT_PUBLIC_API_URL` in your `.env.local` file to point to your backend API.
 
-### Products Table (`public/datas/products.ts`)
+## 2. Integration Steps
+To replace the mock data with your live API:
+1. Open [src/services/api.ts](src/services/api.ts).
+2. Uncomment the `fetch()` blocks inside each function.
+3. Replace or modify the endpoints to match your API structure.
+4. Ensure your API responses match the TypeScript interfaces in [src/types/index.ts](src/types/index.ts).
+
+## 3. Database Schema Requirements
+
+### Products Table
+Refer to the `Product` interface.
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `id` | Integer | Unique identifier |
@@ -18,18 +27,20 @@ The frontend is built with Next.js and currently consumes data from static TypeS
 | `category` | String | e.g., "Lip Gloss", "Skin Care" |
 | `price` | Decimal | Current price |
 | `oldPrice` | Decimal? | Previous price for sale display |
-| `image` | String | Primary image URL/path |
+| `image` | String | Primary image URL (Absolute path recommended) |
 | `badge` | Enum? | 'Sale' or 'New' |
 | `description`| Text | Product description |
 | `slug` | String | Unique URL-friendly identifier |
-| `tags` | JSON Array | List of strings (e.g., ["Cosmetic", "Make Up"]) |
-| `gallery` | JSON Array | List of image URLs/paths |
+| `tags` | JSON Array | List of strings |
+| `gallery` | JSON Array | List of image URLs |
 | `videos` | JSON Array | YouTube video IDs (e.g., ["vP9X2V9c3Uw"]) |
 | `purchaseLink`| String? | External checkout URL |
 | `variantType` | String? | Label for variants (e.g., "Colors") |
 | `variants` | JSON Object| Array of `{ name, image, gallery: [] }` |
+| `featured` | Boolean | Whether to show in Featured section |
 
-### Blogs Table (`public/datas/blogs.ts`)
+### Blogs Table
+Refer to the `Blog` interface.
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `id` | Integer | Unique identifier |
@@ -40,42 +51,37 @@ The frontend is built with Next.js and currently consumes data from static TypeS
 | `month` | String | Month of publication (e.g., "Apr") |
 | `title` | String | Blog title |
 | `excerpt` | Text | Short summary for cards |
-| `description1`| Text | First paragraph |
-| `descriptionmiddle`| Text | Blockquote or middle content |
-| `description2`| Text | Final content section |
-| `image` | String | Cover image URL/path |
-| `isFeatured` | Boolean | Highlight on homepage |
+| `description`| Text | Main content (Supports HTML/Markdown if needed) |
+| `image` | String | Cover image URL |
+| `isFeatured` | Boolean | Highlight on homepage/blog list |
 
-### Homepage & Global Data (`public/datas/homepage.ts`)
-Manage these as separate tables or as a single "Settings/Content" table:
-- **BannerSlides**: `id`, `subtitle`, `title`, `description`, `image`, `buttonLink`.
+### CMS Content Tables
+The following structures are used for homepage sections and site-wide settings:
+- **BannerSlides**: `id`, `subtitle`, `title`, `description`, `image`, `mobileImage`, `buttonLink`.
 - **Testimonials**: `id`, `content`, `author`.
 - **ServiceStats**: `id`, `number`, `title`, `description`.
 - **Timeline**: `id`, `subtitle`, `title`, `description1`, `description2`, `buttonText`, `buttonLink`, `sideImage`, `isReversed`.
-- **InstagramPosts**: `id`, `image`, `title`, `category`, `link`.
-- **SocialLinks**: Facebook, Instagram, TikTok.
+- **ImageGridPosts**: `id`, `image`, `title`, `category`, `link`.
+- **SocialLinks**: `facebook`, `instagram`, `tiktok`.
 
-## 3. API Endpoints (JSON)
-The frontend expects exact key names (camelCase). Ensure your API returns:
+## 4. Expected API Endpoints
+The service layer currently expects the following (can be customized in `api.ts`):
 
-- `GET /api/products`: Full list of products.
-- `GET /api/products/{slug}`: Single product details.
-- `GET /api/blogs`: Full list of blogs.
-- `GET /api/blogs/{slug}`: Single blog details.
-- `GET /api/homepage`: A combined object containing all homepage sections.
-- `POST /api/contact`: Handle contact form submissions (Full Name, Email, Telephone, Website, Message).
+- `GET /products`: returns `Product[]`
+- `GET /products/:slug`: returns `Product`
+- `GET /featured-products`: returns `Product[]`
+- `GET /blogs`: returns `Blog[]`
+- `GET /blogs/:slug`: returns `Blog`
+- `GET /testimonials`: returns `Testimonial[]`
+- `GET /banner-slides`: returns `BannerSlide[]`
+- `GET /social-links`: returns `SocialLinks`
+- `GET /shop-header`: returns `{ image: string }`
+- `POST /contact`: Receives `{ name, email, phone, website, message }`
 
-## 4. Contact Form Integration
-The backend should provide an endpoint to receive data from the contact page.
-- **Fields**: `name`, `email`, `phone`, `website`, `message`.
-- **Action**: Store in database or send via email (using SMTP, SendGrid, Mailtrap, etc.).
-- **Validation**: Ensure all required fields are present and emails are valid.
-
-## 5. Implementation Notes
-- **CORS**: Enable CORS for the frontend domain.
-- **Image Uploads**: Provide paths that the frontend can resolve. Using absolute URLs is recommended.
-- **Slug Generation**: Ensure slugs are auto-generated from titles and kept unique.
-- **Data Types**: Keep consistent with the TypeScript interfaces defined in the `public/datas/` directory.
+## 5. Global Requirements
+- **CORS**: Enable CORS for the frontend domain to allow requests.
+- **Image Hosting**: Use absolute URLs for all image fields or ensure consistent relative paths.
+- **Slugs**: Slugs must be unique and URL-encoded.
 
 ---
-*Generated by GitHub Copilot*
+*Updated for Service Layer Architecture*

@@ -1,6 +1,7 @@
 "use client";
 
-import { testimonials } from "@/public/datas/homepage";
+import { getTestimonials } from "@/src/services/api";
+import { Testimonial } from "@/src/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,13 +9,20 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  useEffect(() => {
+    getTestimonials().then(setTestimonials);
   }, []);
 
+  const nextSlide = useCallback(() => {
+    if (testimonials.length === 0) return;
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials]);
+
   const prevSlide = () => {
+    if (testimonials.length === 0) return;
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
@@ -43,6 +51,8 @@ export default function Testimonials() {
       opacity: 0
     })
   };
+
+  if (testimonials.length === 0) return null;
 
   return (
     <section className="relative bg-[#FCEAE8] py-20 md:py-30 overflow-hidden min-h-[350px] md:min-h-[320px] flex items-center">

@@ -6,20 +6,24 @@ import Qualities from "@/components/Qualities";
 import Testimonials from "@/components/Testimonials";
 import ServiceStats from "@/components/ServiceStats";
 import BlogSection from "@/components/BlogSection";
-import InstagramShowcase from "@/components/InstagramShowcase";
-import { timelineData, qualities, instagramPosts } from "@/public/datas/homepage";
-import { blogs } from "@/public/datas/blogs";
 import Footer from "@/components/Footer";
+import ImageGrid from "@/components/ImageGrid";
+import { getTimelineData, getQualities, getImageGridPosts, getFeaturedBlogs } from "@/src/services/api";
 
-export default function Home() {
-  const featuredBlogs = blogs.filter((b) => b.isFeatured);
+export default async function Home() {
+  const [timelineData, qualities, imageGridPosts, featuredBlogs] = await Promise.all([
+    getTimelineData(),
+    getQualities(),
+    getImageGridPosts(),
+    getFeaturedBlogs()
+  ]);
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       <Banner />
       <FeaturedProducts />
-      <InstagramShowcase posts={instagramPosts} />
+      <ImageGrid posts={imageGridPosts} />
       <Testimonials />
       <ServiceStats />
       <Timeline data={timelineData} />

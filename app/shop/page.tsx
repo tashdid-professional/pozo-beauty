@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useMemo, Suspense } from "react";
+import React, { useState, useMemo, Suspense, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/public/datas/products";
-import { shopHeader } from "@/public/datas/homepage";
+import { getProducts, getShopHeader } from "@/src/services/api";
+import { Product, HeaderData } from "@/src/types";
 import { useSearchParams } from "next/navigation";
 
 export default function ShopPage() {
@@ -22,16 +22,23 @@ function ShopContent() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
   
+  const [products, setProducts] = useState<Product[]>([]);
+  const [shopHeader, setShopHeader] = useState<HeaderData | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortOrder, setSortOrder] = useState("a-z");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
+  useEffect(() => {
+    getProducts().then(setProducts);
+    getShopHeader().then(setShopHeader);
+  }, []);
+
   // Dynamically extract categories from product data
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(products.map((p) => p.category)));
     return ["All", ...uniqueCategories.sort()];
-  }, []);
+  }, [products]);
 
   // Filter and Sort products based on active category, search query, and sort order
   const filteredProducts = useMemo(() => {
@@ -71,7 +78,7 @@ function ShopContent() {
     });
     
     return filtered;
-  }, [activeCategory, searchQuery, sortOrder]);
+  }, [products, activeCategory, searchQuery, sortOrder]);
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -91,13 +98,15 @@ function ShopContent() {
 
       {/* Page Header (Banner Style) */}
       <div className="w-full h-[250px] md:h-[300px] relative overflow-hidden  bg-[#f9f9f9] flex items-center justify-center">
-        <Image
-          src={shopHeader.image}
-          alt="Shop Banner"
-          fill
-          className="object-cover opacity-30"
-          priority
-        />
+        {shopHeader && (
+          <Image
+            src={shopHeader.image}
+            alt="Shop Banner"
+            fill
+            className="object-cover opacity-30"
+            priority
+          />
+        )}
         <div className="relative z-10 text-center px-4">
           <h1 className="text-3xl md:text-5xl font-light tracking-[0.08em] text-[#1a1a1a] uppercase mb-4">
             Shop

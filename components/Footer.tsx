@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { socialLinks } from "@/public/datas/homepage";
+import { getSocialLinks } from "@/src/services/api";
+import { SocialLinks } from "@/src/types";
+import { useState, useEffect } from "react";
 
 const Facebook = ({ size = 16, strokeWidth = 1.5 }: { size?: number; strokeWidth?: number }) => (
   <svg
@@ -51,6 +53,12 @@ const Instagram = ({ size = 16, strokeWidth = 1.5 }: { size?: number; strokeWidt
 );
 
 export default function Footer() {
+  const [socialLinks, setSocialLinks] = useState<SocialLinks | null>(null);
+
+  useEffect(() => {
+    getSocialLinks().then(setSocialLinks);
+  }, []);
+
   return (
     <footer className=" w-full bg-black text-white pt-16 md:pt-24 pb-12 relative">
       <div className="container mx-auto px-6 lg:px-24">
@@ -85,15 +93,19 @@ export default function Footer() {
             new cosmetics site can take everyone&apos;s breaths away.
           </p>
           <div className="flex gap-4">
-            <Link href={socialLinks.facebook} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
-              <Facebook size={16} strokeWidth={1.5} />
-            </Link>
-            <Link href={socialLinks.tiktok} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
-              <TikTok size={16} strokeWidth={1.5} />
-            </Link>
-            <Link href={socialLinks.instagram} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
-              <Instagram size={16} strokeWidth={1.5} />
-            </Link>
+            {socialLinks && (
+              <>
+                <Link href={socialLinks.facebook} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
+                  <Facebook size={16} strokeWidth={1.5} />
+                </Link>
+                <Link href={socialLinks.tiktok} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
+                  <TikTok size={16} strokeWidth={1.5} />
+                </Link>
+                <Link href={socialLinks.instagram} target="_blank" className="border border-white/20 p-3 hover:border-white transition-colors">
+                  <Instagram size={16} strokeWidth={1.5} />
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -110,9 +122,9 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="mt-16 md:mt-24 border-t border-white/10 pt-6 flex flex-col items-center gap-4">
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 uppercase text-[12px] font-lato tracking-[0.08em]">
-          <Link href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-          <Link href="#" className="hover:text-gray-400 transition-colors">Terms and Conditions</Link>
-          <Link href="#" className="hover:text-gray-400 transition-colors">FAQ</Link>
+          <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms and Conditions</Link>
+          <Link href="/faq" className="hover:text-gray-400 transition-colors">FAQ</Link>
         </div>
         <p className="text-[11px] font-lato tracking-[0.08em] text-[#666] ">
           © Pozo Beauty 2026 | Powered by <Link href="https://thebigdogdigital.com/" target="_blank" className="font-extrabold text-[#888] hover:text-white transition-colors">BigDog Digital</Link>

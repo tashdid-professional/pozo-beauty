@@ -25,9 +25,11 @@ export const metadata: Metadata = {
   title: "Pozo Beauty",
   description: "Luxury Cosmetics & Beauty",
   icons: {
-    icon: "/Images/logo.png",
-    shortcut: "/Images/logo.png",
-    apple: "/Images/logo.png",
+    icon: [
+      { url: "/favicon.png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/favicon.png",
   },
 };
 

@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { blogs } from "@/public/datas/blogs";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { blogHeader } from "@/public/datas/homepage";
+import { getBlogBySlug, getBlogHeader } from "@/src/services/api";
 
 export default async function BlogDetails({
   params,
@@ -13,7 +12,10 @@ export default async function BlogDetails({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = blogs.find((b) => b.slug === slug);
+  const [blog, blogHeader] = await Promise.all([
+    getBlogBySlug(slug),
+    getBlogHeader()
+  ]);
 
   if (!blog) {
     notFound();
@@ -61,7 +63,7 @@ export default async function BlogDetails({
         </div>
 
         {/* Content Section */}
-        <div className="container mx-auto px-6 md:px-4 max-w-4xl">
+        <div className="container mx-auto px-6 md:px-4 max-w-5xl">
           <div className="flex flex-wrap items-center justify-center gap-2 text-[13px] md:text-[18px] font-cormorant italic text-[#999] mb-4 lg:mb-1">
             <span>{blog.month} {blog.day}</span>
             <span className="font-lato">-</span>
@@ -75,25 +77,14 @@ export default async function BlogDetails({
           </h2>
 
           <div className="space-y-6 text-[#6b6565] font-cormorant text-base md:text-lg leading-relaxed text-justify">
-            <p className="whitespace-pre-line">
-              {blog.description1}
-            </p>
-            
-            {/* Blockquote Style as seen in design */}
-            <div className="py-2 md:py-4 my-4 md:my-6 italic">
-               <p className="text-lg md:text-[22px] font-cormorant text-[#3f3e3e] text-center leading-snug max-w-3xl mx-auto">
-                 {blog.descriptionmiddle}
-               </p>
-            </div>
-
-            <p>
-              {blog.description2}
+            <p className="">
+              {blog.description}
             </p>
           </div>
         </div>
 
         {/* Comment Form Section */}
-        <div className="container mx-auto px-6 md:px-4 max-w-4xl mt-20 border-t border-gray-100 pt-16">
+        <div className="container mx-auto px-6 md:px-4 max-w-5xl mt-20 border-t border-gray-100 pt-16">
           <h3 className="text-xl md:text-2xl tracking-[0.08em] text-black mb-10 uppercase ">
             Post a Comment
           </h3>

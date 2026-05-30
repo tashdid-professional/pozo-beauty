@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/public/datas/products";
+import { Product } from "@/src/types";
 import { Eye, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -76,11 +76,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="flex justify-center items-center gap-2 ">
               {product.oldPrice && (
                 <span className="font-cormorant text-[#999] line-through text-[22px]">
-                  ${product.oldPrice.toFixed(2)}
+                  <span className="text-[0.7em] mr-0.5">৳ </span>{product.oldPrice.toFixed(2)}
                 </span>
               )}
               <span className="font-cormorant text-black text-[22px]">
-                ${product.price.toFixed(2)}
+                <span className="text-[0.7em] mr-0.5">৳ </span>{product.price.toFixed(2)}
               </span>
             </div>
           </div>
@@ -122,11 +122,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <div className="flex items-center gap-3 mb-4 md:mb-6">
                   {product.oldPrice && (
                     <span className="text-lg md:text-xl text-gray-400 line-through font-cormorant">
-                      ${product.oldPrice.toFixed(2)}
+                      <span className="text-[0.6em] mr-0.5">৳ </span>{product.oldPrice.toFixed(2)}
                     </span>
                   )}
                   <span className="text-xl md:text-2xl text-[#1a1a1a] font-cormorant">
-                    ${product.price.toFixed(2)}
+                    <span className="text-[0.6em] mr-0.5">৳ </span>{product.price.toFixed(2)}
                   </span>
                 </div>
                 <div className="w-12 h-[1px] bg-[#d4b1a4] mb-4 md:mb-6" />

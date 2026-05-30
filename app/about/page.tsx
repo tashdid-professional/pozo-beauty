@@ -2,10 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { aboutData, qualities } from "@/public/datas/homepage";
+import { getAboutData, getQualities } from "@/src/services/api";
 import Qualities from "@/components/Qualities";
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [aboutData, qualities] = await Promise.all([
+    getAboutData(),
+    getQualities()
+  ]);
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />

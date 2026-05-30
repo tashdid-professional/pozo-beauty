@@ -20,6 +20,7 @@ export interface Product {
   purchaseLink?: string;
   variantType?: string; // e.g., "Colors", "Flavors", "Sizes"
   variants?: ProductVariant[];
+  featured?: boolean;
 }
 
 export const products: Product[] = [
@@ -31,6 +32,7 @@ export const products: Product[] = [
     oldPrice: 27.0,
     image: "https://picsum.photos/seed/p1/800/800",
     badge: "Sale",
+    featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec. Eu has vide putent, dico option nominati no eam. Ea erant impetus consequuntur eos, velit congue vidisse eos ne.",
     slug: "film-eyeshadow",
     tags: ["Cosmetic", "Make Up"],
@@ -62,6 +64,7 @@ export const products: Product[] = [
     category: "Lip Gloss",
     price: 25.0,
     image: "https://picsum.photos/seed/p2/800/800",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec. Eu has vide putent, dico option nominati no eam.",
     slug: "wild-palettes",
     tags: ["Cosmetic", "Palettes"],
@@ -75,6 +78,7 @@ export const products: Product[] = [
     category: "Lip Gloss",
     price: 35.0,
     image: "https://picsum.photos/seed/p3/800/800",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec.",
     slug: "rose-safari",
     tags: ["Classic", "Lipstick"],
@@ -89,6 +93,7 @@ export const products: Product[] = [
     price: 32.0,
     image: "https://picsum.photos/seed/p4/800/800",
     badge: "New",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "summer-mirage",
     tags: ["Summer", "Limited"],
@@ -103,6 +108,7 @@ export const products: Product[] = [
     price: 32.0,
     image: "https://picsum.photos/seed/p5/800/800",
     badge: "New",
+    featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "summer-drama",
     tags: ["Drama", "Intense"],
@@ -117,6 +123,7 @@ export const products: Product[] = [
     price: 18.0,
     image: "https://picsum.photos/seed/p6/800/800",
     badge: "Sale",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "velvet-matte",
     tags: ["Matte", "Velvet"],
@@ -131,6 +138,7 @@ export const products: Product[] = [
     price: 45.0,
     image: "https://picsum.photos/seed/p7/800/800",
     badge: "New",
+    featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "glow-serum",
     tags: ["Serum", "Glow"],
@@ -144,6 +152,7 @@ export const products: Product[] = [
     category: "Skin Care",
     price: 38.0,
     image: "https://picsum.photos/seed/p8/800/800",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "silk-foundation",
     tags: ["Foundation", "Silk"],
@@ -157,6 +166,7 @@ export const products: Product[] = [
     category: "Eye Care",
     price: 12.0,
     image: "https://picsum.photos/seed/p9/800/800",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "eyelash-curler",
     tags: ["Tools", "Curler"],
@@ -171,6 +181,7 @@ export const products: Product[] = [
     price: 15.0,
     image: "https://picsum.photos/seed/p10/800/800",
     badge: "New",
+    featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "brow-gel",
     tags: ["Brows", "Gel"],
@@ -185,6 +196,7 @@ export const products: Product[] = [
     price: 22.0,
     image: "https://picsum.photos/seed/p11/800/800",
     badge: "Sale",
+    featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "peach-blush",
     tags: ["Blush", "Peach"],
@@ -198,6 +210,8 @@ export const products: Product[] = [
     category: "Cheek",
     price: 28.0,
     image: "https://picsum.photos/seed/p12/800/800",
+    featured: true,
+
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
     slug: "matte-bronzer",
     tags: ["Bronzer", "Matte"],

@@ -1,14 +1,16 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { blogs } from "@/public/datas/blogs";
-import { blogHeader } from "@/public/datas/homepage";
+import { getBlogs, getBlogHeader } from "@/src/services/api";
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const [blogs, blogHeader] = await Promise.all([
+    getBlogs(),
+    getBlogHeader()
+  ]);
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />

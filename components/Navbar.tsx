@@ -27,11 +27,11 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       // Past banner usually means the height of the banner + initial navbar
-      // Since the banner is likely 100vh or a large fixed height, 
-      // we increase this to ensure the banner is fully cleared.
-      if (window.scrollY > 600) {
+      // Using a threshold with small buffer to prevent flickering
+      const threshold = 600;
+      if (window.scrollY > threshold) {
         setIsScrolled(true);
-      } else {
+      } else if (window.scrollY < threshold - 50) {
         setIsScrolled(false);
       }
     };
@@ -45,12 +45,11 @@ export default function Navbar() {
   return (
     <>
       {/* Static White Navbar above Banner */}
-      {!isScrolled && (
-        <header className="w-full bg-white relative z-40">
-          <div className="hidden md:flex justify-center bg-black text-[#cecece] text-[15px] px-6 py-2 justify-between items-center  font-cormorant italic">
+      <header className="w-full bg-white relative z-40">
+        <div className="hidden md:flex justify-center bg-black text-[#cecece] text-[15px] px-6 py-2 justify-between items-center  font-cormorant italic">
             
             <div className="hidden md:block">
-              Free shipping on international orders of $150+
+              Free shipping on international orders of <span className="text-[0.9em]">৳</span>150+
             </div>
             
           </div>
@@ -114,7 +113,6 @@ export default function Navbar() {
             </div>
           </nav>
         </header>
-      )}
 
       {/* Sticky Black Navbar for Scroll */}
       <header className={`w-full fixed top-0 z-50 transition-all duration-500 bg-black  ${

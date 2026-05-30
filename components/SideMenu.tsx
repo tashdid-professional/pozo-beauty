@@ -3,7 +3,8 @@
 import { X, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { socialLinks } from "@/public/datas/homepage";
+import { getSocialLinks } from "@/src/services/api";
+import { SocialLinks } from "@/src/types";
 
 // Custom SVG Icons to avoid lucide-react export issues
 const Facebook = ({ size = 20 }: { size?: number }) => (
@@ -40,6 +41,11 @@ interface SideMenuProps {
 
 export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   const [mounted, setMounted] = useState(false);
+  const [socialLinks, setSocialLinks] = useState<SocialLinks | null>(null);
+
+  useEffect(() => {
+    getSocialLinks().then(setSocialLinks);
+  }, []);
 
   useEffect(() => {
     setMounted(isOpen);
@@ -92,15 +98,19 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </div>
 
             <div className={`flex gap-6 mt-16 transition-all duration-700 delay-400 ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-              <Link href={socialLinks.facebook} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
-                <Facebook size={16} />
-              </Link>
-              <Link href={socialLinks.instagram} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
-                <Instagram size={16} />
-              </Link>
-              <Link href={socialLinks.tiktok} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
-                <TikTok size={16} />
-              </Link>
+              {socialLinks && (
+                <>
+                  <Link href={socialLinks.facebook} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
+                    <Facebook size={16} />
+                  </Link>
+                  <Link href={socialLinks.instagram} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
+                    <Instagram size={16} />
+                  </Link>
+                  <Link href={socialLinks.tiktok} target="_blank" className="w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300">
+                    <TikTok size={16} />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -128,7 +138,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </p>
 
             <div className={`flex gap-3 mb-20 transition-all duration-700 delay-400 ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-              {[
+              {socialLinks && [
                 { icon: Facebook, href: socialLinks.facebook },
              
                 { icon: Instagram, href: socialLinks.instagram },

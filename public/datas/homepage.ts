@@ -17,6 +17,7 @@ export interface BannerSlide {
   title: string;
   description: string;
   image: string;
+  mobileImage: string;
   buttonLink: string;
 }
 
@@ -39,7 +40,7 @@ export interface Quality {
   description: string;
 }
 
-export interface InstagramPost {
+export interface ImageGridPost {
   id: number;
   image: string;
   title: string;
@@ -106,6 +107,7 @@ export const bannerSlides: BannerSlide[] = [
     title: "SUMMER LOOK",
     description: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores te quas",
     image: "https://picsum.photos/seed/slide1/1920/1080",
+    mobileImage: "https://picsum.photos/seed/slide1m/800/1200",
     buttonLink: "#featured-products",
   },
   {
@@ -114,6 +116,7 @@ export const bannerSlides: BannerSlide[] = [
     title: "PURE ELEGANCE",
     description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, total rem aperiam, eaque ipsa quae ab illo",
     image: "https://picsum.photos/seed/slide2/1920/1080",
+    mobileImage: "https://picsum.photos/seed/slide2m/800/1200",
     buttonLink: "#featured-products",
   },
   {
@@ -122,6 +125,7 @@ export const bannerSlides: BannerSlide[] = [
     title: "MODERN CLASSIC",
     description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem",
     image: "https://picsum.photos/seed/slide3/1920/1080",
+    mobileImage: "https://picsum.photos/seed/slide3m/800/1200",
     buttonLink: "#featured-products",
   },
 ];
@@ -192,7 +196,7 @@ export const qualities: Quality[] = [
   },
 ];
 
-export const instagramPosts: InstagramPost[] = [
+export const imageGridPosts: ImageGridPost[] = [
   {
     id: 1,
     image: "https://picsum.photos/seed/i1/800/800",

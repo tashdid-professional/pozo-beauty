@@ -1,6 +1,8 @@
-import { serviceStats } from "@/public/datas/homepage";
+import { getServiceStats } from "@/src/services/api";
 
-export default function ServiceStats() {
+export default async function ServiceStats() {
+  const serviceStats = await getServiceStats();
+  
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="container mx-auto px-10 md:px-20 lg:px-32">

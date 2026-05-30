@@ -1,32 +1,66 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/public/datas/products";
-import { shopHeader } from "@/public/datas/homepage";
+import { getProducts, getShopHeader } from "@/src/services/api";
+import { Product, HeaderData, ProductVariant } from "@/src/types";
 
 export default function ProductDetailsPage() {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
-  const [activeTab, setActiveTab] = useState("description");
-  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || null);
-  const [mainImage, setMainImage] = useState(product?.image || "");
+  const [product, setProduct] = useState<Product | null>(null);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [shopHeader, setShopHeader] = useState<HeaderData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Update image when product or variant changes
-  React.useEffect(() => {
-    if (product) {
-      if (selectedVariant) {
-        setMainImage(selectedVariant.image);
-      } else {
-        setMainImage(product.image);
+  const [activeTab, setActiveTab] = useState("description");
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+  const [mainImage, setMainImage] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const [productsData, headerData] = await Promise.all([
+        getProducts(),
+        getShopHeader()
+      ]);
+      setAllProducts(productsData);
+      setShopHeader(headerData);
+      
+      const foundProduct = productsData.find((p) => p.slug === slug);
+      if (foundProduct) {
+        setProduct(foundProduct);
+        setSelectedVariant(foundProduct.variants?.[0] || null);
+        setMainImage(foundProduct.image);
       }
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [slug]);
+
+  // Update image when variant changes
+  useEffect(() => {
+    if (selectedVariant) {
+      setMainImage(selectedVariant.image);
+    } else if (product) {
+      setMainImage(product.image);
     }
   }, [product, selectedVariant]);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-white">
+        <Navbar />
+        <div className="container mx-auto px-4 py-40 text-center">
+          <p className="text-lg uppercase tracking-widest animate-pulse">Loading Product...</p>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
 
   if (!product) {
     return (
@@ -34,15 +68,15 @@ export default function ProductDetailsPage() {
         <Navbar />
         
         <div className="container mx-auto px-4 py-40 text-center">
-          <h2 className="text-2xl tracking-[0.08em] uppercase">Product Not Found</h2>
-          <Link href="/shop" className="mt-8 inline-block text-sm tracking-[0.08em] uppercase border-b border-black pb-1">Back to Shop</Link>
+          <h2 className="text-2xl tracking-[0.08em] uppercase text-black">Product Not Found</h2>
+          <Link href="/shop" className="mt-8 inline-block text-sm tracking-[0.08em] uppercase border-b border-black pb-1 hover:text-[#d4b1a4] hover:border-[#d4b1a4] transition-colors">Back to Shop</Link>
         </div>
         <Footer />
       </main>
     );
   }
 
-  const relatedProducts = products
+  const relatedProducts = allProducts
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
@@ -54,13 +88,15 @@ export default function ProductDetailsPage() {
 
       {/* Page Header (Matching Shop) */}
       <div className="w-full h-[250px] md:h-[300px] relative overflow-hidden  bg-[#f9f9f9] flex items-center justify-center">
-        <Image
-          src={shopHeader.image}
-          alt="Product Header"
-          fill
-          className="object-cover opacity-30"
-          priority
-        />
+        {shopHeader && (
+          <Image
+            src={shopHeader.image}
+            alt="Product Header"
+            fill
+            className="object-cover opacity-30"
+            priority
+          />
+        )}
         <div className="relative text-center z-10 px-4">
           <h1 className="text-3xl md:text-5xl tracking-[0.08em] font-light uppercase mb-4">
             SHOP
@@ -113,11 +149,11 @@ export default function ProductDetailsPage() {
             <div className="flex items-center gap-4 mb-6 md:mb-8">
               {product.oldPrice && (
                 <span className="font-cormorant text-[#999] line-through text-lg md:text-xl">
-                  ${product.oldPrice.toFixed(2)}
+                  <span className="text-[0.6em] mr-0.5">৳ </span>{product.oldPrice.toFixed(2)}
                 </span>
               )}
               <span className="font-cormorant text-black text-xl md:text-2xl">
-                ${product.price.toFixed(2)}
+                <span className="text-[0.6em] mr-0.5">৳ </span>{product.price.toFixed(2)}
               </span>
             </div>
 
