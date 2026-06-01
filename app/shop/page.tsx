@@ -50,7 +50,8 @@ function ShopContent() {
       filtered = filtered.filter((p) => 
         p.name.toLowerCase().includes(query) || 
         p.category.toLowerCase().includes(query) ||
-        (p.description && p.description.toLowerCase().includes(query))
+        (p.description && p.description.toLowerCase().includes(query)) ||
+        (p.shortDescription && p.shortDescription.toLowerCase().includes(query))
       );
     }
 

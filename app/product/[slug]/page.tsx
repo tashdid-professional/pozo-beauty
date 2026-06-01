@@ -158,7 +158,7 @@ export default function ProductDetailsPage() {
             </div>
 
             <p className="text-[#a1a1a1] font-cormorant text-base md:text-lg leading-relaxed mb-8 md:mb-10 whitespace-pre-line">
-              {product.description}
+              {product.shortDescription}
             </p>
 
             {/* Variants / Dynamic Selection */}

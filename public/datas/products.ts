@@ -13,6 +13,7 @@ export interface Product {
   image: string;
   badge?: "Sale" | "New";
   description: string;
+  shortDescription: string;
   slug: string;
   tags: string[];
   gallery: string[];
@@ -34,6 +35,7 @@ export const products: Product[] = [
     badge: "Sale",
     featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec. Eu has vide putent, dico option nominati no eam. Ea erant impetus consequuntur eos, velit congue vidisse eos ne.",
+    shortDescription: "A premium lip gloss that provides a glossy, high-shine finish while keeping your lips hydrated throughout the day.",
     slug: "film-eyeshadow",
     tags: ["Cosmetic", "Make Up"],
     gallery: ["https://picsum.photos/seed/p1g1/800/800", "https://picsum.photos/seed/p1g2/800/800", "https://picsum.photos/seed/p1g3/800/800"],
@@ -66,6 +68,7 @@ export const products: Product[] = [
     image: "https://picsum.photos/seed/p2/800/800",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec. Eu has vide putent, dico option nominati no eam.",
+    shortDescription: "An essential palette for creating both subtle day and bold night looks with ease.",
     slug: "wild-palettes",
     tags: ["Cosmetic", "Palettes"],
     gallery: ["https://picsum.photos/seed/p2g1/800/800", "https://picsum.photos/seed/p2g2/800/800"],
@@ -80,6 +83,7 @@ export const products: Product[] = [
     image: "https://picsum.photos/seed/p3/800/800",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut. Eu agam malorum nec.",
+    shortDescription: "A classic lipstick with a smooth texture and rich color payoff.",
     slug: "rose-safari",
     tags: ["Classic", "Lipstick"],
     gallery: ["https://picsum.photos/seed/p3g1/800/800"],
@@ -95,6 +99,7 @@ export const products: Product[] = [
     badge: "New",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "A limited edition summer essential for a vibrant and fresh look.",
     slug: "summer-mirage",
     tags: ["Summer", "Limited"],
     gallery: ["https://picsum.photos/seed/p4g1/800/800"],
@@ -110,6 +115,7 @@ export const products: Product[] = [
     badge: "New",
     featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "Create a dramatic look with this intense and long-lasting formula.",
     slug: "summer-drama",
     tags: ["Drama", "Intense"],
     gallery: ["https://picsum.photos/seed/p5g1/800/800"],
@@ -125,6 +131,7 @@ export const products: Product[] = [
     badge: "Sale",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "A velvety matte finish that feels lightweight and comfortable on the lips.",
     slug: "velvet-matte",
     tags: ["Matte", "Velvet"],
     gallery: ["https://picsum.photos/seed/p6g1/800/800"],
@@ -140,6 +147,7 @@ export const products: Product[] = [
     badge: "New",
     featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "Get that perfect radiant glow with our hydrating and nourishing serum.",
     slug: "glow-serum",
     tags: ["Serum", "Glow"],
     gallery: ["https://picsum.photos/seed/p7g1/800/800"],
@@ -154,6 +162,7 @@ export const products: Product[] = [
     image: "https://picsum.photos/seed/p8/800/800",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "A silk-smooth foundation that provides buildable coverage and a natural finish.",
     slug: "silk-foundation",
     tags: ["Foundation", "Silk"],
     gallery: ["https://picsum.photos/seed/p8g1/800/800"],
@@ -168,6 +177,7 @@ export const products: Product[] = [
     image: "https://picsum.photos/seed/p9/800/800",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "The perfect tool for beautifully curled lashes that last all day.",
     slug: "eyelash-curler",
     tags: ["Tools", "Curler"],
     gallery: ["https://picsum.photos/seed/p9g1/800/800"],
@@ -183,6 +193,7 @@ export const products: Product[] = [
     badge: "New",
     featured: true,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "Keep your brows in place and perfectly defined with our long-wear gel.",
     slug: "brow-gel",
     tags: ["Brows", "Gel"],
     gallery: ["https://picsum.photos/seed/p10g1/800/800"],
@@ -198,6 +209,7 @@ export const products: Product[] = [
     badge: "Sale",
     featured: false,
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "A natural peach flush that adds warmth and glow to any complexion.",
     slug: "peach-blush",
     tags: ["Blush", "Peach"],
     gallery: ["https://picsum.photos/seed/p11g1/800/800"],
@@ -213,6 +225,7 @@ export const products: Product[] = [
     featured: true,
 
     description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    shortDescription: "Get a sun-kissed look without the shine with our velvety matte bronzer.",
     slug: "matte-bronzer",
     tags: ["Bronzer", "Matte"],
     gallery: ["https://picsum.photos/seed/p12g1/800/800"],
