@@ -21,12 +21,12 @@ const Timeline: React.FC<TimelineProps> = ({ data }) => {
             }`}
           >
             {/* Content Side */}
-            <div className={`w-full md:w-1/2 p-10 md:p-24 flex flex-col justify-center bg-white relative ${item.isReversed ? 'md:pl-32' : 'md:pr-32'}`}>
+            <div className={`w-full md:w-1/2 p-10 lg:p-24 flex flex-col justify-center bg-white relative ${item.isReversed ? 'lg:pl-32' : 'lg:pr-32'}`}>
               <div className="max-w-md mx-auto xl:mx-0">
                 <h4 className="font-tuesday-night text-4xl text-[#d1d1d1] lowercase mb-2">
                   {item.subtitle}
                 </h4>
-                <h2 className="font-lato text-2xl md:text-3xl tracking-[0.08em] uppercase text-black mb-2 leading-tight md:whitespace-nowrap">
+                <h2 className="font-lato text-2xl lg:text-3xl tracking-[0.08em] uppercase text-black mb-2 leading-tight md:whitespace-nowrap">
                   {item.title}
                 </h2>
                 <div className="mb-2">
