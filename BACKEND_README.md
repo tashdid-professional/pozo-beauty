@@ -29,7 +29,8 @@ Refer to the `Product` interface.
 | `oldPrice` | Decimal? | Previous price for sale display |
 | `image` | String | Primary image URL (Absolute path recommended) |
 | `badge` | Enum? | 'Sale' or 'New' |
-| `description`| Text | Product description |
+| `description`| Text | Main product description (Detailed) |
+| `shortDescription`| Text | Concise summary (For cards/top section) |
 | `slug` | String | Unique URL-friendly identifier |
 | `tags` | JSON Array | List of strings |
 | `gallery` | JSON Array | List of image URLs |
